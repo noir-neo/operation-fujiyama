@@ -9705,6 +9705,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1051649269}
+  _explosions:
+  - {fileID: 394058421}
+  - {fileID: 1386159174}
+  - {fileID: 499722565}
 --- !u!1 &955527072
 GameObject:
   m_ObjectHideFlags: 0
