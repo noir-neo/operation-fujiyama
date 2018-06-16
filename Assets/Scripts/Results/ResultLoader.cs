@@ -18,9 +18,8 @@ namespace Results {
 
         private void StoreAndLoadResult(Vector2 v)
         {
-            var distance = v.magnitude;
-            Store.Distance = v.y;
-            Store.IsHit = distance < _hittableDistance;
+            Store.Point = v;
+            Store.IsHit = v.magnitude < _hittableDistance;
 
             SceneManager.LoadScene("Result");
         }
