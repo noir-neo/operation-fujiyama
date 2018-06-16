@@ -27,5 +27,9 @@ namespace Players
         [SerializeField]
         private float _minAltitude;
         public float MinAltitude => _minAltitude;
+
+        [SerializeField]
+        private float _shakePower;
+        public float ShakePower => _shakePower;
     }
 }

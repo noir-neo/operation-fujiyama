@@ -21,8 +21,8 @@ namespace Players
             var velocity = transform.TransformDirection(_core.Velocity.Value * Time.deltaTime);
 
             var pos = transform.localPosition;
-            pos.x += velocity.x;
-            pos.y += velocity.y;
+            pos.x += velocity.x + _core.Shake.Value.x;
+            pos.y += velocity.y + _core.Shake.Value.y;
 
             var torque = _core.Torque.Value * Time.deltaTime;
             var rotation = transform.rotation * Quaternion.AngleAxis(torque, Vector3.forward);
