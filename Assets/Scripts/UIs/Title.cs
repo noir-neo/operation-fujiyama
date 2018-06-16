@@ -11,7 +11,7 @@ namespace UIs
 
         void Start()
         {
-            _playerCore.Inject()
+            _playerCore.Fire()
                 .Subscribe(_ => gameObject.SetActive(false))
                 .AddTo(this);
         }
