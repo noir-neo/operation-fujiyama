@@ -14,7 +14,7 @@ namespace Players
         [SerializeField]
         private InputEventProvider _input;
 
-        private static readonly float StartAltitude = 5f;
+        private static readonly float StartAltitude = 4f;
 
         public IReadOnlyReactiveProperty<Vector2> Velocity => _velocity;
         private readonly ReactiveProperty<Vector2> _velocity = new ReactiveProperty<Vector2>();
@@ -68,7 +68,7 @@ namespace Players
 
         private Vector2 RandomShake()
         {
-            return Random.insideUnitCircle * _param.ShakePower;
+            return Random.insideUnitCircle * _param.ShakePower * _altitude.Value;
         }
 
         public IObservable<Vector2> Impact()
