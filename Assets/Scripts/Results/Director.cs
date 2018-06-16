@@ -12,10 +12,13 @@ namespace Results
         [SerializeField]
         private List<GameObject> _explosions;
 
+        [SerializeField]
+        private float _playerPositionScale;
+
         private void Awake()
         {
             Vector3 position = _player.transform.position;
-            position.x = Store.Distance;
+            position.x = Store.Distance * _playerPositionScale;
             _player.transform.position = position;
 
             foreach (var explosion in _explosions) {
