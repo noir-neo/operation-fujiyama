@@ -11,8 +11,18 @@ namespace Players
         public float MoveSpeed => _moveSpeed;
 
         [SerializeField]
-        private float _gravity;
-        public float Gravity => _gravity;
+        private float _torque;
+        public float Torque => _torque;
+        [SerializeField]
+        private float _torqueAcceleration;
+        public float TorqueAcceleration => _torqueAcceleration;
+
+        [SerializeField]
+        private float _fallSpeed;
+        public float FallSpeed => _fallSpeed;
+        [SerializeField]
+        private float _fallSpeedAcceleration;
+        public float FallSpeedAcceleration => _fallSpeedAcceleration;
 
         [SerializeField]
         private float _minAltitude;

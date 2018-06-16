@@ -101,7 +101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _param:
     _moveSpeed: 1
-    _gravity: 0.1
+    _torque: 30
+    _torqueAcceleration: 10
+    _fallSpeed: 0.1
+    _fallSpeedAcceleration: 0.01
     _minAltitude: 0.02
   _input: {fileID: 114489866088621062}
 --- !u!114 &114489866088621062
