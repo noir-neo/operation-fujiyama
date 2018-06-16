@@ -19,7 +19,7 @@ namespace Results {
         private void StoreAndLoadResult(Vector2 v)
         {
             var distance = v.magnitude;
-            Store.Distance = distance;
+            Store.Distance = v.y;
             Store.IsHit = distance < _hittableDistance;
 
             SceneManager.LoadScene("Result");
