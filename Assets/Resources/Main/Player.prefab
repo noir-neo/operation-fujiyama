@@ -106,6 +106,7 @@ MonoBehaviour:
     _fallSpeed: 0.1
     _fallSpeedAcceleration: 0.01
     _minAltitude: 0.02
+    _shakePower: 0.05
   _input: {fileID: 114489866088621062}
 --- !u!114 &114489866088621062
 MonoBehaviour:
