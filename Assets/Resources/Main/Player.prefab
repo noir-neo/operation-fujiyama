@@ -65,7 +65,7 @@ Camera:
   far clip plane: 100
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -102,11 +102,11 @@ MonoBehaviour:
   _param:
     _moveSpeed: 1
     _torque: 30
-    _torqueAcceleration: 10
+    _torqueAcceleration: 15
     _fallSpeed: 0.1
-    _fallSpeedAcceleration: 0.01
+    _fallSpeedAcceleration: 0.02
     _minAltitude: 0.02
-    _shakePower: 0.05
+    _shakePower: 0.02
   _input: {fileID: 114489866088621062}
 --- !u!114 &114489866088621062
 MonoBehaviour:
