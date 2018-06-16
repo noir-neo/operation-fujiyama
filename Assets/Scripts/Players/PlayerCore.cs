@@ -25,7 +25,7 @@ namespace Players
         void Start()
         {
             _input.Move
-                .Select(CalcVelocity)
+                .WithLatestFrom(_altitude, CalcVelocity)
                 .Subscribe(v => _velocity.Value = v)
                 .AddTo(this);
 
@@ -43,10 +43,9 @@ namespace Players
                 .AddTo(this);
         }
 
-        private Vector2 CalcVelocity(Vector2 v)
+        private Vector2 CalcVelocity(Vector2 v, float altitude)
         {
-            // TODO: 高度に応じて移動量変わる
-            return v * _param.MoveSpeed;
+            return v * _param.MoveSpeed * altitude;
         }
     }
 }
