@@ -40,18 +40,15 @@ namespace Players
                 .Subscribe(v => _velocity.Value = v)
                 .AddTo(this);
 
-            var start = _input.Move
-                .Skip(1)
-                .First();
-            start.ContinueWith(_ => this.UpdateAsObservable())
+            Inject().ContinueWith(_ => this.UpdateAsObservable())
                 .Subscribe(_ => Accelerate())
                 .AddTo(this);
-            start.ContinueWith(_ => this.UpdateAsObservable())
+            Inject().ContinueWith(_ => this.UpdateAsObservable())
                 .Select(_ => _fallSpeed.Value)
                 .Select(v => v * Time.deltaTime)
                 .Subscribe(v => _altitude.Value -= v)
                 .AddTo(this);
-            start.ContinueWith(_ => this.UpdateAsObservable())
+            Inject().ContinueWith(_ => this.UpdateAsObservable())
                 .Select(_ => RandomShake())
                 .WithLatestFrom(_altitude, CalcVelocity)
                 .Subscribe(x => _shake.Value = x)
@@ -80,5 +77,13 @@ namespace Players
                 .Select(_ => transform.position)
                 .Select(v => new Vector2(v.x, v.y));
         }
-    }
+
+        public IObservable<Unit> Inject()
+        {
+            return _input.Move
+                .Skip(1)
+                .First()
+                .AsUnitObservable();
+        }
+}
 }
