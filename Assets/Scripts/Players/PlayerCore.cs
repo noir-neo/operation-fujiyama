@@ -33,27 +33,25 @@ namespace Players
         void Start()
         {
             _torque.Value = _param.Torque;
+            _fallSpeed.Value = _param.FallSpeed;
 
             _input.Move
                 .WithLatestFrom(_altitude, CalcVelocity)
                 .Subscribe(v => _velocity.Value = v)
                 .AddTo(this);
 
-            _input.Move
+            var start = _input.Move
                 .Skip(1)
-                .First()
-                .Do(_ => _fallSpeed.Value = _param.FallSpeed)
-                .ContinueWith(_ => this.UpdateAsObservable())
+                .First();
+            start.ContinueWith(_ => this.UpdateAsObservable())
                 .Subscribe(_ => Accelerate())
                 .AddTo(this);
-
-            this.UpdateAsObservable()
+            start.ContinueWith(_ => this.UpdateAsObservable())
                 .Select(_ => _fallSpeed.Value)
                 .Select(v => v * Time.deltaTime)
                 .Subscribe(v => _altitude.Value -= v)
                 .AddTo(this);
-
-            this.UpdateAsObservable()
+            start.ContinueWith(_ => this.UpdateAsObservable())
                 .Select(_ => RandomShake())
                 .WithLatestFrom(_altitude, CalcVelocity)
                 .Subscribe(x => _shake.Value = x)
