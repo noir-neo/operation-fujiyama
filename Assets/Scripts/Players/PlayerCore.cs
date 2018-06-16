@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
@@ -46,6 +47,13 @@ namespace Players
         private Vector2 CalcVelocity(Vector2 v, float altitude)
         {
             return v * _param.MoveSpeed * altitude;
+        }
+
+        public IObservable<Vector2> Impact()
+        {
+            return _altitude.First(a => a < _param.MinAltitude)
+                .Select(_ => transform.position)
+                .Select(v => new Vector2(v.x, v.y));
         }
     }
 }

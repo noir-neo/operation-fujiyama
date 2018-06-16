@@ -102,7 +102,7 @@ MonoBehaviour:
   _param:
     _moveSpeed: 1
     _gravity: 0.1
-    _minAltitude: 0
+    _minAltitude: 0.02
   _input: {fileID: 114489866088621062}
 --- !u!114 &114489866088621062
 MonoBehaviour:
