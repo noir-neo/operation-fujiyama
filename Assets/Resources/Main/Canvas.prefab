@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 224481134964556756}
   - component: {fileID: 222724472657119144}
   - component: {fileID: 114869306354742158}
+  - component: {fileID: 114060299587335662}
   m_Layer: 5
   m_Name: KaijuMarker
   m_TagString: Untagged
@@ -81,6 +82,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114060299587335662
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1320546336629594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb0f927d98d6a45d08f492e7dc03cdc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 224481134964556756}
 --- !u!114 &114185565920584740
 MonoBehaviour:
   m_ObjectHideFlags: 1
