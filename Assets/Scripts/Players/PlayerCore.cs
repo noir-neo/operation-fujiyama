@@ -18,6 +18,9 @@ namespace Players
         public IReadOnlyReactiveProperty<Vector2> Velocity => _velocity;
         private readonly ReactiveProperty<Vector2> _velocity = new ReactiveProperty<Vector2>();
 
+        public IReadOnlyReactiveProperty<float> Torque => _torque;
+        private readonly ReactiveProperty<float> _torque = new ReactiveProperty<float>();
+
         private readonly ReactiveProperty<float> _fallSpeed = new ReactiveProperty<float>();
 
         public IReadOnlyReactiveProperty<float> Altitude => _altitude;
@@ -25,6 +28,8 @@ namespace Players
 
         void Start()
         {
+            _torque.Value = _param.Torque;
+
             _input.Move
                 .WithLatestFrom(_altitude, CalcVelocity)
                 .Subscribe(v => _velocity.Value = v)
@@ -33,12 +38,13 @@ namespace Players
             _input.Move
                 .Skip(1)
                 .First()
-                // TODO: 徐々に加速する
-                .Subscribe(_ => _fallSpeed.Value = _param.Gravity)
+                .Do(_ => _fallSpeed.Value = _param.FallSpeed)
+                .ContinueWith(_ => this.UpdateAsObservable())
+                .Subscribe(_ => Accelerate())
                 .AddTo(this);
 
             this.UpdateAsObservable()
-                .WithLatestFrom(_fallSpeed, (_, v) => v)
+                .Select(_ => _fallSpeed.Value)
                 .Select(v => v * Time.deltaTime)
                 .Subscribe(v => _altitude.Value -= v)
                 .AddTo(this);
@@ -47,6 +53,12 @@ namespace Players
         private Vector2 CalcVelocity(Vector2 v, float altitude)
         {
             return v * _param.MoveSpeed * altitude;
+        }
+
+        private void Accelerate()
+        {
+            _fallSpeed.Value += _param.FallSpeedAcceleration * Time.deltaTime;
+            _torque.Value += _param.TorqueAcceleration * Time.deltaTime;
         }
 
         public IObservable<Vector2> Impact()

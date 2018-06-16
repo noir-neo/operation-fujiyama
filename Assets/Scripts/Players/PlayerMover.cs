@@ -12,18 +12,22 @@ namespace Players
         void Start()
         {
             this.UpdateAsObservable()
-                .WithLatestFrom(_core.Velocity, (_, v) => v)
-                .Select(v => v * Time.deltaTime)
-                .Subscribe(Move)
+                .Subscribe(_ => Move())
                 .AddTo(this);
         }
 
-        private void Move(Vector2 velocity)
+        private void Move()
         {
-            var pos = transform.position;
+            var velocity = transform.TransformDirection(_core.Velocity.Value * Time.deltaTime);
+
+            var pos = transform.localPosition;
             pos.x += velocity.x;
             pos.y += velocity.y;
-            transform.position = pos;
+
+            var torque = _core.Torque.Value * Time.deltaTime;
+            var rotation = transform.rotation * Quaternion.AngleAxis(torque, Vector3.forward);
+
+            transform.SetPositionAndRotation(pos, rotation);
         }
     }
 }
