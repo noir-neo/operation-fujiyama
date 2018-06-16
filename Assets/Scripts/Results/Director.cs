@@ -18,7 +18,8 @@ namespace Results
         private void Awake()
         {
             Vector3 position = _player.transform.position;
-            position.x = Store.Distance * _playerPositionScale;
+            position.x = Store.Point.magnitude * _playerPositionScale;
+            if (Store.Point.y < 0) position.x *= -1;
             _player.transform.position = position;
 
             foreach (var explosion in _explosions) {

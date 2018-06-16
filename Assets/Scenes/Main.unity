@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerCore: {fileID: 519420034}
-  _hittableDistance: 0.05
+  _hittableDistance: 0.01
 --- !u!4 &1276065001
 Transform:
   m_ObjectHideFlags: 0
